@@ -1,3 +1,6 @@
+// Recursive circle drawing along both axes
+// Each recursive step reduces the size and shifts positions to create a grid of circles
+
 function setup() {
   createCanvas(400, 400);
   ellipseMode(RADIUS);
@@ -5,34 +8,22 @@ function setup() {
 }
 
 function draw() {
-  background(220);
-  rCircle(width / 2, color(0, 128, 255));
-  // rCircles(width / 4, 3 * width / 4, color(255, 128, 0));
+  background(200);
+  recursiveCircles(width / 2, height / 2, width / 4);
 }
 
-function rCircle(r, c) {
-  if (r > 1) {
-    stroke(c);
+// Draw circles recursively along both axes
+function recursiveCircles(x, y, r) {
+  if (r > 4) {
+    stroke(random(100, 255), random(100, 255), random(100, 255));
     strokeWeight(2);
     noFill();
-    circle(width / 2, height / 2, r);
-    const nextColor = lerpColor(c, color(255), 0.2);
-    rCircle(r / 2, nextColor);
-  }
-}
+    circle(x, y, r);
 
-function rCircles(x1, x2, c) {
-  const d = abs(x1 - x2);
-  if (d > 4) {
-    const r = d / 2;
-    const hr = r / 2;
-    stroke(c);
-    strokeWeight(2);
-    noFill();
-    circle(x1, height / 2, r);
-    circle(x2, height / 2, r);
-    const nextColor = lerpColor(c, color(255), 0.2);
-    rCircles(x1 - hr, x1 + hr, nextColor);
-    rCircles(x2 - hr, x2 + hr, nextColor);
+    // Recurse for circles along axes
+    recursiveCircles(x - r, y, r / 2); // Left
+    recursiveCircles(x + r, y, r / 2); // Right
+    recursiveCircles(x, y - r, r / 2); // Top
+    recursiveCircles(x, y + r, r / 2); // Bottom
   }
 }
