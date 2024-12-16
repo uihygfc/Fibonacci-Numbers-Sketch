@@ -19,11 +19,12 @@ function recursiveCircles(x, y, r) {
     strokeWeight(2);
     noFill();
     circle(x, y, r);
-
-    // Recurse for circles along axes
-    recursiveCircles(x - r, y, r / 2); // Left
-    recursiveCircles(x + r, y, r / 2); // Right
-    recursiveCircles(x, y - r, r / 2); // Top
-    recursiveCircles(x, y + r, r / 2); // Bottom
+    
+// Recursive for circles around axes
+recursiveCircles(x - r, y, r / 2); // Left
+recursiveCircles(x + r, y, r / 2); // Right
+recursiveCircles(x, y - r, r / 2); // Top
+recursiveCircles(x, y + r, r / 2); // Bottom
+   
   }
 }
